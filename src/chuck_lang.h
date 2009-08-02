@@ -235,6 +235,7 @@ CK_DLL_MFUN( string_trim );
 CK_DLL_MFUN( string_toString );
 CK_DLL_MFUN( string_set_at );
 CK_DLL_MFUN( string_get_at );
+CK_DLL_MFUN( string_substr );
 
 
 //-----------------------------------------------------------------------------

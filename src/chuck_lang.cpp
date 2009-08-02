@@ -704,15 +704,21 @@ t_CKBOOL init_class_string( Chuck_Env * env, Chuck_Type * type )
     func = make_new_mfun( "string", "toString", string_toString );
     if( !type_engine_import_mfun( env, func ) ) goto error;
 
-/*    // add at()
-    func = make_new_mfun( "int", "ch", string_set_at );
+    // add ch()
+    func = make_new_mfun( "string", "ch", string_set_at );
     func->add_arg( "int", "index" );
-    func->add_arg( "int", "val" );
+    func->add_arg( "string", "val" );
     if( !type_engine_import_mfun( env, func ) ) goto error;
-    func = make_new_mfun( "int", "ch", string_get_at );
+    func = make_new_mfun( "string", "ch", string_get_at );
     func->add_arg( "int", "index" );
     if( !type_engine_import_mfun( env, func ) ) goto error;
-*/
+
+    // add substr()
+    func = make_new_mfun( "string", "substr", string_substr );
+    func->add_arg( "int", "start" );
+    func->add_arg( "int", "n_chars" );
+    if( !type_engine_import_mfun( env, func ) ) goto error;
+
     // end the class import
     type_engine_import_class_end( env );
     
@@ -2174,21 +2180,35 @@ CK_DLL_MFUN( string_toString )
     RETURN->v_string = s;
 }
 
-/*
 CK_DLL_MFUN( string_set_at )
 {
     Chuck_String * s = (Chuck_String *)SELF;
-    t_CKINT c = GET_CK_INT(
-    RETURN->v_int = s->str.length();
+    Chuck_String * str = (Chuck_String *)instantiate_and_initialize_object( &t_string, NULL);
+    int index = GET_NEXT_INT(ARGS);
+    Chuck_String * new_val = GET_NEXT_STRING(ARGS);
+    str->str = s->str.substr(0, index) + new_val->str + s->str.substr(index + 1);
+    RETURN->v_string = str;
 }
 
 CK_DLL_MFUN( string_get_at )
 {
     Chuck_String * s = (Chuck_String *)SELF;
-    RETURN->v_int = s->str.length();
+    Chuck_String * str = (Chuck_String *)instantiate_and_initialize_object( &t_string, NULL);
+    str->str = s->str.substr(GET_NEXT_INT(ARGS), 1);
+    RETURN->v_string = str;
 }
-*/
 
+CK_DLL_MFUN( string_substr )
+{
+    Chuck_String * s = (Chuck_String *)SELF;
+    Chuck_String * str = (Chuck_String *)instantiate_and_initialize_object( &t_string, NULL);
+    int start_index = GET_NEXT_INT(ARGS);
+    int n_chars = GET_NEXT_INT(ARGS);
+    if (n_chars < 0)
+        n_chars = s->str.length() - start_index + n_chars + 1;
+    str->str = s->str.substr(start_index, n_chars);
+    RETURN->v_string = str;
+}
 
 // array.size()
 CK_DLL_MFUN( array_get_size )
