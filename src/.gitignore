@@ -1,0 +1,8 @@
+*.o
+chuck
+chuck.exe
+chuck.output
+chuck.tab.c
+chuck.tab.h
+chuck.yy.c
+chuck.yy.h
