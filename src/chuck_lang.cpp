@@ -718,6 +718,9 @@ t_CKBOOL init_class_string( Chuck_Env * env, Chuck_Type * type )
     func->add_arg( "int", "start" );
     func->add_arg( "int", "n_chars" );
     if( !type_engine_import_mfun( env, func ) ) goto error;
+    func = make_new_mfun( "string", "substr", string_substr_to_end );
+    func->add_arg( "int", "start" );
+    if( !type_engine_import_mfun( env, func ) ) goto error;
 
     // end the class import
     type_engine_import_class_end( env );
@@ -2206,6 +2209,16 @@ CK_DLL_MFUN( string_substr )
     int n_chars = GET_NEXT_INT(ARGS);
     if (n_chars < 0)
         n_chars = s->str.length() - start_index + n_chars + 1;
+    str->str = s->str.substr(start_index, n_chars);
+    RETURN->v_string = str;
+}
+
+CK_DLL_MFUN( string_substr_to_end )
+{
+    Chuck_String * s = (Chuck_String *)SELF;
+    Chuck_String * str = (Chuck_String *)instantiate_and_initialize_object( &t_string, NULL);
+    int start_index = GET_NEXT_INT(ARGS);
+    int n_chars = s->str.length() - start_index + n_chars + 1;
     str->str = s->str.substr(start_index, n_chars);
     RETURN->v_string = str;
 }
