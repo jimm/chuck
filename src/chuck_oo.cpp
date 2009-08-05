@@ -1929,7 +1929,14 @@ t_CKBOOL Chuck_IO_File::writeLine( const string & val )
 //-----------------------------------------------------------------------------
 t_CKINT Chuck_IO_File::read32i()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    uint32_t val;
+    m_io >> val;
+
+    return (t_CKINT)val;
 }
 
 
@@ -1941,7 +1948,16 @@ t_CKINT Chuck_IO_File::read32i()
 //-----------------------------------------------------------------------------
 t_CKINT Chuck_IO_File::read24i()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    uint16_t short_val;
+    uint8_t byte_val;
+    m_io >> short_val;
+    m_io >> byte_val;
+
+    return (t_CKINT)((uint32_t)(short_val << 8) + (uint32_t)byte_val);
 }
 
 
@@ -1953,7 +1969,14 @@ t_CKINT Chuck_IO_File::read24i()
 //-----------------------------------------------------------------------------
 t_CKINT Chuck_IO_File::read16i()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    uint16_t val;
+    m_io >> val;
+
+    return (t_CKINT)val;
 }
 
 
@@ -1965,7 +1988,14 @@ t_CKINT Chuck_IO_File::read16i()
 //-----------------------------------------------------------------------------
 t_CKINT Chuck_IO_File::read8i()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    uint8_t val;
+    m_io >> val;
+
+    return (t_CKINT)val;
 }
 
 
@@ -1977,7 +2007,15 @@ t_CKINT Chuck_IO_File::read8i()
 //-----------------------------------------------------------------------------
 t_CKSINGLE Chuck_IO_File::read32f()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    float val;
+    m_io >> val;
+
+    return (t_CKSINGLE)val;
+
 }
 
 
@@ -1989,5 +2027,12 @@ t_CKSINGLE Chuck_IO_File::read32f()
 //-----------------------------------------------------------------------------
 t_CKDOUBLE Chuck_IO_File::read64f()
 {
-    return 0;
+    // sanity
+    if( !good2read() ) return 0;
+
+    // read value
+    double val;
+    m_io >> val;
+
+    return (t_CKDOUBLE)val;
 }
