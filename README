@@ -1,5 +1,11 @@
-Note: this is a fork of ChucK. I'm slowing adding some very small features. 
+Note: this is a fork of ChucK. I'm slowing adding some very small features.
+
+I've also added the "-arch i386" flag to the compile and link phases in
+makefile.osx. Without it, compilation on Mac OS X Snow Leopard is hopeless.
+
   -- Jim Menard, jimm@io.com
+
+================================================================
 
 ChucK: a Concurrent, On-the-fly, Audio Programming Language
 

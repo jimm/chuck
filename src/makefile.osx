@@ -1,10 +1,10 @@
 
 CXX=gcc
-CXX_LINK=g++
+CXX_LINK=g++ -arch i386
 LEX=flex
 YACC=bison
 INCLUDES=
-FLAGS=-D__MACOSX_CORE__ -c
+FLAGS=-D__MACOSX_CORE__ -c -arch i386
 LIBS=-framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
 	-framework IOKit -framework Carbon -lstdc++ -lm
 SF_OBJ=util_sndfile.o
