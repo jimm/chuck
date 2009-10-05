@@ -1,7 +1,5 @@
-Note: this is a fork of ChucK. I'm slowing adding some very small features.
-
-I've also added the "-arch i386" flag to the compile and link phases in
-makefile.osx. Without it, compilation on Mac OS X Snow Leopard is hopeless.
+Note: this is a fork of ChucK 1.2.1.3 (dracula). I'm slowing adding some very
+small features. Right now, I've implemented String.ch and added String.substr.
 
   -- Jim Menard, jimm@io.com
 
@@ -39,12 +37,16 @@ authors:
 
 ChucK home page:
     http://chuck.cs.princeton.edu/
+    http://chuck.stanford.edu/
 
 ChucK documentation:
     http://chuck.cs.princeton.edu/doc/
 
 Princeton Sound Lab:
     http://soundlab.cs.princeton.edu/
+
+CCRMA:
+    http://ccrma.stanford.edu/
 
 ---
 
