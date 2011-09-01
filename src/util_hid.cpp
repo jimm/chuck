@@ -2927,10 +2927,10 @@ static int TiltSensor_detect()
     else
         powerbookKernFunc = 21;
 		
-	fprintf( stdout, "osx_version = %d \n", osx_version );
+	fprintf( stdout, "osx_version = %ld \n", osx_version );
     
     // ibook/powerbook (OS X 10.4.x) tilt sensor interface
-    if( TiltSensor_test( powerbookKernFunc, "IOI2CMotionSensor", kSMSPowerbookDataType ) )
+    if( TiltSensor_test( powerbookKernFunc, (char *)"IOI2CMotionSensor", kSMSPowerbookDataType ) )
     {
         TiltSensor_data.kernFunc = powerbookKernFunc;
         TiltSensor_data.dataType = kSMSPowerbookDataType;
@@ -2939,7 +2939,7 @@ static int TiltSensor_detect()
     }
     
     // hi resolution powerbook tilt sensor interface
-    if( TiltSensor_test( powerbookKernFunc, "PMUMotionSensor", kSMSPowerbookDataType ) )
+    if( TiltSensor_test( powerbookKernFunc, (char *)"PMUMotionSensor", kSMSPowerbookDataType ) )
     {
         TiltSensor_data.kernFunc = powerbookKernFunc;
         TiltSensor_data.dataType = kSMSPowerbookDataType;
@@ -2948,7 +2948,7 @@ static int TiltSensor_detect()
     }
     
     // mac book (pro) tilt sensor interface
-    if( TiltSensor_test( 5, "SMCMotionSensor", kSMSMacBookProDataType ) )
+    if( TiltSensor_test( 5, (char *)"SMCMotionSensor", kSMSMacBookProDataType ) )
     {
         TiltSensor_data.kernFunc = 5;
         TiltSensor_data.dataType = kSMSMacBookProDataType;
